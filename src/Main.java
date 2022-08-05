@@ -4,7 +4,8 @@ public class Main {
 		System.out.println("성적관리프로그램 시작");
 		Student[]array = new Student[100];
 		Input input = new Input(array);
-		int count = input.input();
+		int count = input.fileInput();
+		System.out.println("count =" + count);
 		
 		Calc calc = new Calc(array);
 		calc.calc(count);
