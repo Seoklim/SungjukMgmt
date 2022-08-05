@@ -12,7 +12,7 @@ public class Sort {
 		for(int i = 0; i < count-1; i++) {
 			for(int j = 0; j < count-1 ; j++) {
 				if(this.array[j].getTot() < this.array[j+1].getTot()) {
-					this.swap(this.array[j], this.array[j+1]);
+					this.swap(this.array[i], this.array[j+1]);
 				}
 			}
 		}
