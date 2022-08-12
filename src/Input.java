@@ -1,60 +1,44 @@
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Input {
-	private Student [] array;
+	private List<Student>list;
 	private Scanner sc;
 	private File file;
- 	private BufferedReader br;
+
 	
-	public Input(Student[] array) {
-		this.array = array;
+	public Input(List<Student>list) {
+		this.list = list;
 		this.file = new File("C:/Temp/sungjuk_utf8.dat");
 		try {
-			this.br = new BufferedReader(new FileReader(this.file));
+			this.sc = new Scanner(this.file, "utf-8");
 		} catch (FileNotFoundException e) {
 			System.out.println("File Not Found");
 		}
 	}
-	public int fileInput() {
-		int count = 0;
+	public void fileInput() {
 		String line = null;
-		while(true) {
-			count++;
-			try {
-				line = this.br.readLine();
-				System.out.println(line);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		StringTokenizer st = null;
+		while(this.sc.hasNextLine()) {
+			line = this.sc.nextLine();
+			//문자열 Parsing : String's split(), Scanner's useDelimeter(), StringTokenizer
+			st = new StringTokenizer(line); //whitespace 기준으로 토큰화하는 클래스
+			System.out.println(st.countTokens());
+			String [] array = new String[st.countTokens()]; //방 6개 배열생성
+			for(int i = 0; i < array.length; i++) {
+				array[i] = st.nextToken();
 			}
-			if(line == null)break;
+			Student student = new Student(array[0], array[1], Integer.parseInt(array[2]),
+					Integer.parseInt(array[3]), Integer.parseInt(array[4]), Integer.parseInt(array[5]));
+			this.list.add(student);
 		}
-		return count - 1;
+		
 	}
-	public
+
 	
 	
-	public int input() {
-		String io = null;
-		int count = 0;
-		do {
-			count++;
-			System.out.println("Hakbun :");  String hakbun = this.sc.nextLine();
-			System.out.println("Name :");		String name = this.sc.nextLine();
-			System.out.println("Korean :");	int kor = this.sc.nextInt();
-			System.out.println("English :");	int eng = this.sc.nextInt();
-			System.out.println("Math :");		int math = this.sc.nextInt();
-			System.out.println("EDPS :");		int edp = this.sc.nextInt();
-			this.sc.nextLine(); //buffer 날리기
-			this.array[count-1] = new Student(hakbun,name,kor,eng,math,edp);
-			System.out.print("계속(i/o)? :");
-			io = this.sc.next();
-		}while(io.equals("I") || io.equals ("i"));
-		return count;
-	}
+
 }

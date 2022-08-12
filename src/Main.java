@@ -1,20 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
+
+import 성적관리프로그램.Sort;
 
 public class Main {
 	public static void main(String[] args) {
-		System.out.println("성적관리프로그램 시작");
-		Student[]array = new Student[100];
-		Input input = new Input(array);
-		int count = input.fileInput();
-		System.out.println("count =" + count);
+		System.out.println("성적관리프로젝트 시작");
+		List<Student> list = new ArrayList<Student>(2);
+		Input input = new Input(list);
+		input.fileInput();
 		
-		Calc calc = new Calc(array);
-		calc.calc(count);
+		Calc calc = new Calc(list);
+		calc.calc();
+
 		
-		Sort sort = new Sort(array, count);
-		sort.bubbleSort();
+		Sort sort = new Sort(list);
+		sort.sort();
+
 		
 		Output output = new Output();
-		output.print(array, count);
-		System.out.println("성적관리프로그램 끝");
+		output.print(list);
+		System.out.println("성적관리프로젝트 끝");
 	}
 }
